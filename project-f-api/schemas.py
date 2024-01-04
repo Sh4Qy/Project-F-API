@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 
 class Dish(BaseModel):
+    id: int
     name: str
     description: Optional[str] = None
     img: str
@@ -13,6 +14,7 @@ class Dish(BaseModel):
     category_id: int = 1
 
 class Category(BaseModel):
+    id: int
     name: str
     img: str
     dishes: List[Dish] = []

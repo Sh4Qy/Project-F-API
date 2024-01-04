@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends
 from ..database import get_db
 from ..controllers import dish
 from .. import schemas
+from typing import List
 
 router = APIRouter(
     prefix='/dish',
@@ -9,7 +10,7 @@ router = APIRouter(
 )
 
 
-@router.get('/')
+@router.get('/', response_model=List[schemas.Dish])
 def get_all(db = Depends(get_db)):
     return dish.get_all(db)
 
