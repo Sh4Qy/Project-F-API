@@ -1,6 +1,7 @@
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from .. import models
+import os
 
 def get_all(db: Session):
     dishes = db.query(models.Dish).all()
@@ -26,7 +27,14 @@ def create(request ,db: Session):
     )
     db.add(new_dish)
     db.commit()
-    return f'Dish was created successfully {request}'
+    return {'message':'Dish was created successfully', 'data': request}
+
+async def upload(file):
+    file_path = os.path.join("C:\Python FullStack\Project F\project-f\public\\uploads", file.filename)
+    with open(file_path, "wb") as f:
+        file_content = await file.read()
+        f.write(file_content)
+    return 'The file was uploaded successfully'
 
 def update(id, request, db: Session):
     dish = db.query(models.Dish).filter(models.Dish.id == id).first()

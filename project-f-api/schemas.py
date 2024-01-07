@@ -1,11 +1,12 @@
+from fastapi import UploadFile, File
 from pydantic import BaseModel
 from typing import List, Optional
 
 class Dish(BaseModel):
-    id: int
+    id: Optional[int] = None
     name: str
     description: Optional[str] = None
-    img: str
+    img: Optional[str] = None
     is_dairy: bool
     have_nuts: bool
     breakfast_dish: bool

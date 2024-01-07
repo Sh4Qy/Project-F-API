@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, UploadFile, File
 from ..database import get_db
 from ..controllers import dish
 from .. import schemas
@@ -8,7 +8,6 @@ router = APIRouter(
     prefix='/dish',
     tags=["Dishes"]
 )
-
 
 @router.get('/', response_model=List[schemas.Dish])
 def get_all(db = Depends(get_db)):
@@ -21,6 +20,11 @@ def get_dish(id: int, db = Depends(get_db)):
 @router.post('/')
 def create(request: schemas.Dish, db = Depends(get_db)):
     return dish.create(request, db)
+
+@router.post('/upload')
+async def upload(file: UploadFile = File(...)):
+    response =  await dish.upload(file)
+    return response
 
 @router.put('/{id}')
 def update(id: int, request: schemas.Dish, db = Depends(get_db)):
