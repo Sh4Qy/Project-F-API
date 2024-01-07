@@ -15,7 +15,7 @@ class Dish(BaseModel):
     category_id: int = 1
 
 class Category(BaseModel):
-    id: int
+    id: Optional[int] = None
     name: str
     img: str
-    dishes: List[Dish] = []
+    dishes: Optional[List[Dish]] = []
