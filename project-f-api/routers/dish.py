@@ -33,3 +33,7 @@ def update(id: int, request: schemas.Dish, db = Depends(get_db)):
 @router.delete('/{id}')
 def delete(id: int, db = Depends(get_db)):
     return dish.delete(id, db)
+
+@router.post('/choosefood')
+def choose_food(request: schemas.ChooseFood, db = Depends(get_db)):
+    return dish.choose_food(request, db)

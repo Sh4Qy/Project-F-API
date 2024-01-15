@@ -34,6 +34,7 @@ class History(Base):
     __tablename__ ='history'
 
     id = Column(Integer, primary_key=True, index=True)
+    dish_name = Column(String)
     dish_id = Column(Integer, ForeignKey('dishes.id'))
     time = Column(DateTime, default= datetime.now())
 

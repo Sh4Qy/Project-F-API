@@ -19,3 +19,11 @@ class Category(BaseModel):
     name: str
     img: str
     dishes: Optional[List[Dish]] = []
+
+class ChooseFood(BaseModel):
+    is_dairy: bool
+    have_nuts: bool
+    breakfast_dish: bool
+    lunch_dish: bool
+    dinner_dish: bool
+    category_id: str
